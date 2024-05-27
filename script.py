@@ -92,12 +92,21 @@ def write_raw_to_file(raw_data: dict, filename: str):
 def start_job(url: str, max_retries=3) -> str:
     """Starts a job to export comments from the given URL."""
 
+    paramns = {
+        "url": url,
+        "options": json.dumps({
+            #"sessionid": "",
+            
+            # É possível adicionar mais opções de extração aqui
+        })
+    }
+
     for _ in range(max_retries):
         response = requests.put(
             f"{API_URL}/export",
             headers=HEADERS,
             timeout=30,
-            params={"url": url},
+            params=paramns
         )
         
         if response.status_code != 200:
