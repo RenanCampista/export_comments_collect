@@ -2,6 +2,7 @@ import os
 import sys
 import dotenv
 import requests
+import json
 from time import sleep
 dotenv.load_dotenv()
 
@@ -85,7 +86,7 @@ def write_raw_to_file(raw_data: dict, filename: str):
     """Writes the raw data to a file in JSON format.
     """
     with open(filename, "w") as file:
-        file.write(raw_data)
+        json.dump(raw_data, file)
 
 
 def start_job(url: str, max_retries=3) -> str:
